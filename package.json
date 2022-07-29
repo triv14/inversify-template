@@ -5,6 +5,7 @@
   "repository": "https://github.com/benmar000/inversify-template.git",
   "author": "Ben Martinez <ben.martinez@clincierge.com>",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "convict": "^6.2.3",
     "express": "^4.18.1",
