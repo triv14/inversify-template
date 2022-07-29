@@ -1,0 +1,8 @@
+{
+  "name": "inversify-template",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "https://github.com/benmar000/inversify-template.git",
+  "author": "Ben Martinez <ben.martinez@clincierge.com>",
+  "license": "MIT"
+}
