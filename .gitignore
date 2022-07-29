@@ -104,5 +104,6 @@ dist
 .tern-port
 
 # project specific .env files
-development.json
-test.json
+*development.json
+*test.json
+*docker-compose.yml

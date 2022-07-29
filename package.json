@@ -7,7 +7,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=\"development\" nodemon index.ts"
+    "dev": "NODE_ENV=\"development\" nodemon index.ts",
+    "docker": "COMPOSE_PROJECT_NAME=inversify-template docker-compose up",
+    "docker-rebuild": "docker container stop inversify-template_backend_1 inversify-template_pgadmin_1 inversify-template-db; docker system prune && docker volume prune -f --filter \"label=com.docker.compose.project=inversify-template\" && COMPOSE_PROJECT_NAME=inversify-template docker-compose up --force-recreate --build"
   },
   "dependencies": {
     "convict": "^6.2.3",
