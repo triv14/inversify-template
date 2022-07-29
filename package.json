@@ -6,6 +6,9 @@
   "author": "Ben Martinez <ben.martinez@clincierge.com>",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "dev": "NODE_ENV=\"development\" nodemon index.ts"
+  },
   "dependencies": {
     "convict": "^6.2.3",
     "express": "^4.18.1",
