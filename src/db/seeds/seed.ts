@@ -24,6 +24,7 @@ export const seed = async (knex: Knex) => {
       id: uuidv4(),
       name: faker.name.firstName(),
       ownerId: faker.helpers.arrayElement(customers).id,
+      species: faker.animal.type(),
     });
   }
 
