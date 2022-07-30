@@ -1,3 +1,6 @@
+// we should not need to import "reflect-metadata" here, 
+// but there is a bug which requires it.
+import "reflect-metadata";
 import { inject, injectable } from "inversify";
 import Customer from "../../model/Customer";
 import DAO from "../base-classes/DAO";
