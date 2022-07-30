@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { injectable } from "inversify";
-import Service from "../service/customers/CustomersService";
+import Service from "../service/pets/PetsService";
 import ApiError from "../middleware/ApiError";
 
 @injectable()
-class CustomersController {
+class PetsController {
   constructor(private readonly _service: Service) {
     this.getAll = this.getAll.bind(this);
   }
@@ -25,7 +25,7 @@ class CustomersController {
         stack = e.stack;
       } else {
         message = JSON.stringify(e);
-        stack = "CustomersController.getAll()";
+        stack = "PetsController.getAll()";
       }
 
       next(ApiError.internal(message));
@@ -33,4 +33,4 @@ class CustomersController {
   }
 }
 
-export default CustomersController;
+export default PetsController;

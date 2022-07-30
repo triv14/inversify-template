@@ -1,14 +1,14 @@
 import chai from "chai";
 import sinon, { SinonSpy, SinonStubbedInstance } from "sinon";
 import { Request, Response, NextFunction } from "express";
-import Controller from "../CustomersController";
-import Service from "../../service/customers/CustomersService";
+import Controller from "../PetsController";
+import Service from "../../service/pets/PetsService";
 import ApiError from "../../middleware/ApiError";
 
 const { expect } = chai;
 const sandbox = sinon.createSandbox();
 
-describe("src :: controller :: CustomersController", () => {
+describe("src :: controller :: PetsController", () => {
   let service: SinonStubbedInstance<Service>;
   let controller: Controller;
 
