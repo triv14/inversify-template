@@ -14,6 +14,32 @@ export const seed = async (knex: Knex) => {
       email: faker.internet.email(),
     });
   }
-  
   await knex("customers").insert(customers);
+
+  // pets
+  const pets = [];
+
+  for (let i = 0; i < 20; i++) {
+    pets.push({
+      id: uuidv4(),
+      name: faker.name.firstName(),
+      ownerId: faker.helpers.arrayElement(customers).id,
+    });
+  }
+
+  await knex("pets").insert(pets);
+
+  // purchases
+  const purchases = [];
+
+  for (let i = 0; i < 100; i++) {
+    purchases.push({
+      id: uuidv4(),
+      customerId: faker.helpers.arrayElement(customers).id,
+      date: faker.date.past(),
+      total: faker.commerce.price(),
+    });
+  }
+
+  await knex("purchases").insert(purchases);
 };
