@@ -13,6 +13,7 @@
     "create-migration": "yarn esm-resolution knex migrate:make --migrations-directory src/db/migrations",
     "migrate": "yarn esm-resolution knex migrate:latest --knexfile src/db/knexFile.ts",
     "migrate-down": "yarn esm-resolution knex migrate:down --knexfile src/db/knexFile.ts",
+    "seed": "yarn esm-resolution knex seed:run --knexfile src/db/knexFile.ts",
     "esm-resolution": "NODE_OPTIONS=\"--loader=ts-node/esm --es-module-specifier-resolution=node --trace-warnings --no-warnings\""
   },
   "dependencies": {
@@ -24,9 +25,11 @@
     "lodash-es": "^4.17.21",
     "objection": "^3.0.1",
     "pg": "^8.7.3",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.3.0",
     "@types/chai": "^4.3.1",
     "@types/convict": "^6.1.1",
     "@types/express": "^4.17.13",
@@ -35,6 +38,7 @@
     "@types/lodash-es": "^4.17.6",
     "@types/mocha": "^9.1.1",
     "@types/sinon": "^10.0.13",
+    "@types/uuid": "^8.3.4",
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
