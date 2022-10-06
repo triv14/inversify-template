@@ -7,6 +7,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "build": "tsc --noEmit false --outDir build && yarn copy-files",
+    "copy-files": "cp -r src/config/*.json ./build/src/config && find src/db/migrations -name '*.js' -exec cp '{}' './build/src/db/migrations' ';'",
+    "start": "yarn build && node --es-module-specifier-resolution=node ./build/index.js",
     "dev": "NODE_ENV=\"development\" nodemon index.ts",
     "docker": "COMPOSE_PROJECT_NAME=inversify-template docker-compose up",
     "docker-rebuild": "docker container stop inversify-template_backend_1 inversify-template_pgadmin_1 inversify-template-db; docker system prune && docker volume prune -f --filter \"label=com.docker.compose.project=inversify-template\" && COMPOSE_PROJECT_NAME=inversify-template docker-compose up --force-recreate --build",
