@@ -7,6 +7,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "build": "tsc --noEmit false --outDir build && yarn copy-files",
+    "copy-files": "cp -r src/config/*.json ./build/src/config && find src/db/migrations -name '*.js' -exec cp '{}' './build/src/db/migrations' ';'",
+    "start": "yarn build && node --es-module-specifier-resolution=node ./build/index.js",
     "dev": "NODE_ENV=\"development\" nodemon index.ts",
     "test": "mocha ./src/**/*.test.*",
     "docker": "COMPOSE_PROJECT_NAME=inversify-template docker-compose up",
