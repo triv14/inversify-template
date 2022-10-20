@@ -3,6 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
 
 export const seed = async (knex: Knex) => {
+  // Deletes ALL existing entries
+  await knex.raw("truncate table customers restart identity cascade"); 
+  await knex.raw("truncate table pets restart identity cascade");
+  await knex.raw("truncate table purchases restart identity cascade");
+
   // customers
   const customers = [];
 
