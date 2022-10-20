@@ -12,10 +12,7 @@ class PetsController {
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await this._service.getAll();
-      return res.status(200).json({
-        message: "successfully retrieved",
-        sheets: result,
-      });
+      return res.status(200).json(result);
     } catch (e: unknown) {
       let message;
       let stack;
