@@ -14,17 +14,7 @@ class CustomersController {
       const result = await this._service.getAll();
       return res.status(200).json(result);
     } catch (e: unknown) {
-      let message;
-      let stack;
-
-      if (e instanceof Error) {
-        message = e.message;
-        stack = e.stack;
-      } else {
-        message = JSON.stringify(e);
-        stack = "CustomersController.getAll()";
-      }
-
+      const message = e instanceof Error ? e.message : JSON.stringify(e);
       next(ApiError.internal(message));
     }
   }
