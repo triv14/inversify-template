@@ -5,7 +5,7 @@ export const up = async (knex: Knex) => {
     table.uuid("id").defaultTo(knex.raw("uuid_generate_v4()"));
     table.timestamps(true, true);
     table.string("name");
-    table.string("ownerId");
+    table.uuid("ownerId");
   });
 };
 
