@@ -2,6 +2,9 @@
 
 ## Getting Started
 
+### Background
+This application follows the Layered Architecture design pattern. For more information, see this article for Java: https://medium.com/java-vault/layered-architecture-b2f4ebe8d587
+
 ### Prerequisites
 Docker Desktop for Mac, Linux, or Windows: https://www.docker.com/products/docker-desktop/
 
