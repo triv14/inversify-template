@@ -11,21 +11,14 @@ const { expect } = chai;
 const sandbox = sinon.createSandbox();
 
 describe("src :: service :: base-classes :: Service", () => {
-  // test double variables (stubs))
+  class SubclassService extends Service<Model> {}
+  let subclassService: Service<Model>;
+
   let dao: SinonStubbedInstance<DAO<Model>>;
 
-  let service: Service<Model>;
   beforeEach(() => {
     dao = sandbox.createStubInstance(DAO);
-    dao.getAll = sandbox.stub();
-    dao.insert = sandbox.stub();
-    dao.insertGraph = sandbox.stub();
-    dao.findById = sandbox.stub();
-    dao.truncate = sandbox.stub();
-    dao.deleteById = sandbox.stub();
-    dao.patchAndFetchById = sandbox.stub();
-
-    service = new Service(dao);
+    subclassService = new SubclassService(dao);
   });
 
   afterEach(() => {
@@ -37,7 +30,7 @@ describe("src :: service :: base-classes :: Service", () => {
       // arrange
       dao.getAll.resolves([]);
       // act
-      const result = await service.getAll();
+      const result = await subclassService.getAll();
       // assert
       sandbox.assert.calledOnce(dao.getAll);
       expect(result).to.deep.equal([]);
@@ -49,29 +42,19 @@ describe("src :: service :: base-classes :: Service", () => {
       // arrange
       const options = {};
       // act
-      await service.insert(options);
+      await subclassService.insert(options);
       // assert
       sandbox.assert.calledOnce(dao.insert);
       sandbox.assert.calledWith(dao.insert, options);
     });
   });
-  describe("insertGraph", () => {
-    it("calls DAO with expected args", async () => {
-      // arrange
-      const options = {};
-      // act
-      await service.insertGraph(options);
-      // assert
-      sandbox.assert.calledOnce(dao.insertGraph);
-      sandbox.assert.calledWith(dao.insertGraph, options);
-    });
-  });
+
   describe("findById", () => {
     it("calls DAO with expected args", async () => {
       // arrange
       const id = uuidv4();
       // act
-      await service.findById(id);
+      await subclassService.findById(id);
       // assert
       sandbox.assert.calledOnce(dao.findById);
       sandbox.assert.calledWith(dao.findById, id);
@@ -81,7 +64,7 @@ describe("src :: service :: base-classes :: Service", () => {
     it("calls DAO with expected method", async () => {
       // arrange
       // act
-      await service.truncate();
+      await subclassService.truncate();
       // assert
       sandbox.assert.calledOnce(dao.truncate);
     });
@@ -91,22 +74,22 @@ describe("src :: service :: base-classes :: Service", () => {
       // arrange
       const id = uuidv4();
       // act
-      await service.deleteById(id);
+      await subclassService.deleteById(id);
       // assert
       sandbox.assert.calledOnce(dao.deleteById);
       sandbox.assert.calledWith(dao.deleteById, id);
     });
   });
-  describe("patchAndFetchById", () => {
+  describe("updateAndFetchById", () => {
     it("calls DAO with expected args", async () => {
       // arrange
       const id = uuidv4();
       const options = {};
       // act
-      await service.patchAndFetchById(id, options);
+      await subclassService.updateAndFetchById(id, options);
       // assert
-      sandbox.assert.calledOnce(dao.patchAndFetchById);
-      sandbox.assert.calledWith(dao.patchAndFetchById, id, options);
+      sandbox.assert.calledOnce(dao.updateAndFetchById);
+      sandbox.assert.calledWith(dao.updateAndFetchById, id, options);
     });
   });
 });

@@ -1,7 +1,7 @@
 import Objection, {  PartialModelObject } from "objection";
 import DAO from "../../dao/base-classes/DAO";
 
-class Service<T extends Objection.Model> {
+abstract class Service<T extends Objection.Model> {
   constructor(protected readonly _DAO: DAO<T>) {}
 
   async getAll() {

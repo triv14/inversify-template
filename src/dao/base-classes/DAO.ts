@@ -1,6 +1,6 @@
 import Objection, { PartialModelObject } from "objection";
 
-class DAO<T extends Objection.Model> {
+abstract class DAO<T extends Objection.Model> {
   constructor(protected readonly model: typeof Objection.Model) {
     this.model = model;
   }
@@ -17,7 +17,7 @@ class DAO<T extends Objection.Model> {
   async insert(insert: PartialModelObject<T> | PartialModelObject<T>[]) {
     const result = await this.model
       .query()
-      .insert(insert)
+      .insert(insert).returning("*");
     return result as T | T[];
   }
 
