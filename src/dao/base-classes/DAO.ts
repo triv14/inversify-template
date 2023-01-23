@@ -1,4 +1,4 @@
-import Objection, { PartialModelObject, QueryBuilder } from "objection";
+import Objection, { PartialModelObject } from "objection";
 
 class DAO<T extends Objection.Model> {
   constructor(protected readonly model: typeof Objection.Model) {
@@ -6,39 +6,47 @@ class DAO<T extends Objection.Model> {
   }
 
   async getAll() {
-    return this.model.query() as QueryBuilder<T>;
+    const result = await this.model.query();
+    return result as T[];
   }
 
-  // NOTE: The return value of the insert query only contains the properties given to the insert method plus the identifier. 
-  // This is because we don't make an additional fetch query after the insert. Using postgres you can chain returning('*') to the query to get all properties
-  // NOTE: As of 2022, only Postgres supports passing an array of objects to insert
-  async insert(options: PartialModelObject<T> | PartialModelObject<T>[]) {
-    return this.model
+  /**
+   * 
+   * @note As of 2022, only Postgres supports passing an array of objects to insert
+   */
+  async insert(insert: PartialModelObject<T> | PartialModelObject<T>[]) {
+    const result = await this.model
       .query()
-      .insert(options)
-      .returning("*") as unknown as QueryBuilder<T, T[]>;
-  }
-
-  async insertGraph(
-    graph: Objection.PartialModelGraph<T, T & Objection.GraphParameters>
-  ) {
-    return this.model.query().insertGraph(graph);
+      .insert(insert)
+    return result as T | T[];
   }
 
   async findById(id: string) {
-    return this.model.query().findById(id);
+    const result = await this.model.query().findById(id);
+    return result as T | undefined;
   }
 
+    /**
+   *
+   * @note The Objection types suggest we should be getting void, but we are getting an empty model back
+   */
   async truncate() {
-    return this.model.query().truncate();
+    const result = await this.model.query().truncate();
+    return result as unknown as T;
   }
 
+    /**
+   *
+   * @returns the number of rows deleted
+   */
   async deleteById(id: string) {
-    return this.model.query().deleteById(id).returning("*");
+    const result = await this.model.query().deleteById(id);
+    return result;
   }
 
-  async patchAndFetchById(id: string, patch: Objection.PartialModelObject<T>) {
-    return this.model.query().patchAndFetchById(id, patch);
+  async updateAndFetchById(id: string, patch: Objection.PartialModelObject<T>) {
+    const result = await this.model.query().updateAndFetchById(id, patch);
+    return result as T | undefined;
   }
 }
 

@@ -1,19 +1,22 @@
-import Objection, { PartialModelGraph, PartialModelObject } from "objection";
+import Objection, {  PartialModelObject } from "objection";
 import DAO from "../../dao/base-classes/DAO";
 
-class Service<M extends Objection.Model> {
-  constructor(protected readonly _DAO: DAO<M>) {}
+class Service<T extends Objection.Model> {
+  constructor(protected readonly _DAO: DAO<T>) {}
 
   async getAll() {
     return this._DAO.getAll();
   }
 
-  async insert(obj: PartialModelObject<M> | PartialModelObject<M>[]) {
-    return this._DAO.insert(obj);
-  }
-
-  async insertGraph(obj: PartialModelGraph<M>) {
-    return this._DAO.insertGraph(obj);
+ /**
+   * 
+   * @note As of 2022, only Postgres supports passing an array of objects to insert
+   * @note overload the insert method to accept either a single object or an array of objects
+   */
+  insert(insert: PartialModelObject<T>): Promise<T>;
+  insert(insert: PartialModelObject<T>[]): Promise<T[]>;
+  async insert(insert: PartialModelObject<T> | PartialModelObject<T>[]) {
+    return this._DAO.insert(insert);
   }
 
   async findById(id: string) {
@@ -28,8 +31,8 @@ class Service<M extends Objection.Model> {
     return this._DAO.deleteById(id);
   }
 
-  async patchAndFetchById(id: string, options: any) {
-    return this._DAO.patchAndFetchById(id, options);
+  async updateAndFetchById(id: string, options: PartialModelObject<T>) {
+    return this._DAO.updateAndFetchById(id, options);
   }
 }
 
