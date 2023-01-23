@@ -4,6 +4,7 @@ import router from "./routes/router";
 
 class ExpressSetup {
   app: Express;
+
   server?: HttpServer;
 
   constructor() {
@@ -11,7 +12,7 @@ class ExpressSetup {
     this.setup();
   }
 
-  async setup() {
+  setup() {
     // parsers
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
@@ -22,9 +23,11 @@ class ExpressSetup {
 
   // server
   run(port: string | number) {
-    return (this.server = this.app.listen(port, () => {
+    this.server = this.app.listen(port, () => {
+      // eslint-disable-next-line no-console
       console.log(`server running on port ${port}`);
-    }));
+    });
+    return this.server;
   }
 
   stop(done?: (err?: Error) => void) {

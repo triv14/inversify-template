@@ -6,4 +6,4 @@ const container = new Container({
   skipBaseClassChecks: true,
 });
 
-export { container };
+export default { container };

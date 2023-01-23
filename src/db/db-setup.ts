@@ -1,6 +1,6 @@
-import knex from 'knex';
-import knexFile from './knexFile';
-import { Model } from 'objection';
+import { Model } from "objection";
+import knex from "knex";
+import knexFile from "./knexFile";
 
 const setupDb = () => {
   const db = knex(knexFile);
