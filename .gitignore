@@ -109,3 +109,12 @@ dist
 *docker-compose.yml
 # Build
 build/
+
+# yarn non-zero-install version
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
