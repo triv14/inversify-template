@@ -2,8 +2,8 @@ import convict from "convict";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 const config = convict({
   env: {
@@ -58,8 +58,9 @@ const config = convict({
 
 const env = config.get("env");
 try {
-  config.loadFile(path.join(__dirname, `${env}.json`));
+  config.loadFile(path.join(dirname, `${env}.json`));
 } catch (error) {
+  // eslint-disable-next-line no-console
   console.error("Could not load env file", error);
 }
 config.validate({ allowed: "strict" });
