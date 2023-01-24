@@ -1,12 +1,13 @@
 import { Knex } from "knex";
 
-export const up = (knex: Knex) => {
-  return knex.schema.alterTable("pets", (table) => {
+export const up = async (knex: Knex) => {
+  await knex.schema.alterTable("pets", (table) => {
     table.string("species");
   });
 };
 
-export const down = (knex: Knex) =>
-  knex.schema.alterTable("pets", (table) => {
+export const down = async (knex: Knex) => {
+  await knex.schema.alterTable("pets", (table) => {
     table.dropColumn("species");
   });
+};

@@ -6,7 +6,7 @@ import DAO from "../base-classes/DAO";
 class PetDAO extends DAO<Pet> {
   constructor(
     @inject("Pet")
-    protected readonly _pet: typeof Pet
+    protected readonly _pet: typeof Pet,
   ) {
     super(_pet);
   }
