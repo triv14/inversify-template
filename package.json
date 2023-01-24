@@ -16,7 +16,8 @@
     "docker-rebuild": "docker container stop inversify-template_backend_1 inversify-template_pgadmin_1 inversify-template-db; docker system prune && docker volume prune -f --filter \"label=com.docker.compose.project=inversify-template\" && COMPOSE_PROJECT_NAME=inversify-template docker-compose up --force-recreate --build",
     "create-migration": "NODE_OPTIONS=\"--loader=ts-node/esm --es-module-specifier-resolution=node --trace-warnings --no-warnings\" knex migrate:make --migrations-directory --migrations-directory src/db/migrations -x ts",
     "migrate": "NODE_OPTIONS=\"--loader=ts-node/esm --es-module-specifier-resolution=node --trace-warnings --no-warnings\" knex migrate:latest --knexfile src/db/knexFile.ts",
-    "migrate-down": "NODE_OPTIONS=\"--loader=ts-node/esm --es-module-specifier-resolution=node --trace-warnings --no-warnings\" knex migrate:down --knexfile src/db/knexFile.ts"
+    "migrate-down": "NODE_OPTIONS=\"--loader=ts-node/esm --es-module-specifier-resolution=node --trace-warnings --no-warnings\" knex migrate:down --knexfile src/db/knexFile.ts",
+    "seed": "NODE_OPTIONS=\"--loader=ts-node/esm --es-module-specifier-resolution=node --trace-warnings --no-warnings\" knex seed:run --knexfile src/db/knexFile.ts"
   },
   "dependencies": {
     "convict": "^6.2.3",
