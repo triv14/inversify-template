@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { v4 as uuidv4 } from "uuid";
 
-const purchaseSchema = z.object({
+const customerSchema = z.object({
   id: z
     .string()
     .uuid()
@@ -11,4 +11,4 @@ const purchaseSchema = z.object({
   email: z.string().email(),
 });
 
-export default purchaseSchema;
+export default customerSchema;
