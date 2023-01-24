@@ -49,3 +49,33 @@ Visit http://localhost:8080/api/customers to confirm there is seeded data
 ```
 yarn test
 ```
+
+### Using the ApiErrorHandler Express middleware
+The ApiErrorHandler should only be used in the controller layer. 
+
+It's invoked by calling next() with an instance of ApiError
+
+Whenever you call next(), your function will continue executing until it reaches the next middleware function or the end of the function or a return statement
+```
+class CustomersController {
+  constructor(private readonly _service: Service) {
+    this.getById = this.getById.bind(this);
+  }
+
+  async getById(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    try {
+      const result = await this._service.getById(id);
+      if (!result) {
+        next(ApiError.notFound(`Customer with id ${id} not found`));
+        return;
+      }
+      return res.status(200).json(result);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : JSON.stringify(e);
+      next(ApiError.internal(message));
+    }
+  }
+}
+
+```

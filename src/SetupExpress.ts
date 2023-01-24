@@ -2,6 +2,9 @@ import express, { Express } from "express";
 import { Server as HttpServer } from "http";
 import router from "./routes/router";
 
+// Middlewares
+import ApiErrorHandler from "./middleware/ApiErrorHandler";
+
 class ExpressSetup {
   app: Express;
 
@@ -19,6 +22,9 @@ class ExpressSetup {
 
     // Routes
     this.app.use("/api", router);
+
+    // middleware
+    this.app.use(ApiErrorHandler);
   }
 
   // server
