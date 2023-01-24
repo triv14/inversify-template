@@ -16,4 +16,4 @@ const container = new Container({
 container.bind("Customer").toConstantValue(Customer);
 container.bind("Pet").toConstantValue(Pet);
 
-export default { container };
+export default container;

@@ -1,6 +1,6 @@
 import express from "express";
+import container from "../inversify.config";
 import Controller from "../controller/CustomersController";
-import { container } from "../inversify.config";
 
 const controller = container.resolve(Controller);
 

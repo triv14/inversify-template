@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
 import { injectable } from "inversify";
+import { NextFunction, Request, Response } from "express";
 import Service from "../service/pets/PetsService";
 import ApiError from "../middleware/ApiError";
 
