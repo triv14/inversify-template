@@ -9,7 +9,7 @@ class PetsController {
     this.getAll = this.getAll.bind(this);
   }
 
-  async getAll(req: Request, res: Response, next: NextFunction) {
+  public getAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await this._service.getAll();
       res.status(200).json(result);
@@ -17,7 +17,7 @@ class PetsController {
       const message = e instanceof Error ? e.message : JSON.stringify(e);
       next(ApiError.internal(message));
     }
-  }
+  };
 }
 
 export default PetsController;
