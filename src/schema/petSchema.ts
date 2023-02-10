@@ -8,6 +8,7 @@ const petSchema = z.object({
     .default(() => uuidv4()),
   name: z.string().min(1).max(255),
   ownerId: z.string().uuid(),
+	species: z.string(),
 });
 
 export default petSchema;

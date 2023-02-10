@@ -1,8 +1,9 @@
 import chai from "chai";
 import sinon, { SinonStubbedInstance } from "sinon";
-import DAO from "../../../dao/base-classes/DAO";
-import { Model } from "objection";
 import { v4 as uuidv4 } from 'uuid';
+import { Model } from "objection";
+import DAO from "../../../dao/base-classes/DAO";
+
 
 // file under test
 import Service from "../Service";
